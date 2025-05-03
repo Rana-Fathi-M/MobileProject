@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileproj/profile/profile_page/profile_page.dart';
 import "../home_widget/home_widget.dart";
 
 class MyHomePage extends StatelessWidget {
@@ -9,7 +10,21 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("The ${title ?? "Tree"}")),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("The ${title ?? "Tree"}"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+            icon: Icon(Icons.account_box),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

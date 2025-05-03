@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileproj/home/home_page/home_page.dart';
 import 'package:mobileproj/portfolio/portfolio/portfolio.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const PortfolioScreen(),
+      home: const MyHomePage(),
     );
   }
 }
