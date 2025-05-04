@@ -1,7 +1,32 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final ImagePicker imagePicker = ImagePicker();
+  File? selectedImage;
+
+  Future<void> selectImage(ImageSource source) async {
+    XFile? image = await imagePicker.pickImage(source: source);
+    if (image != null && mounted) {
+      setState(() {
+        selectedImage = File(image.path);
+      });
+    }
+  }
+
+  void deleteImage() {
+    setState(() {
+      selectedImage = null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +44,25 @@ class ProfilePage extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     backgroundColor: Colors.grey,
                     radius: 100,
-                    child: Icon(Icons.person, size: 200),
+                    child: selectedImage == null
+                        ? const Icon(Icons.person, size: 100)
+                        : ClipOval(
+                            child: Image.file(
+                              selectedImage!,
+                              width: 200,
+                              height: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 25,
                     child: IconButton(
-                      color: Colors.grey,
+                      color: Colors.white,
                       icon: const Icon(Icons.camera_alt, size: 25),
                       onPressed: () {
                         showModalBottomSheet(
@@ -48,14 +82,15 @@ class ProfilePage extends StatelessWidget {
                                 ),
                                 const Divider(),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     ProfileOptionButton(
                                       icon: Icons.camera_alt,
                                       label: 'Camera',
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        // Handle camera
+                                        selectImage(ImageSource.camera);
                                       },
                                     ),
                                     ProfileOptionButton(
@@ -63,9 +98,10 @@ class ProfilePage extends StatelessWidget {
                                       label: 'Gallery',
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        // Handle gallery
+                                        selectImage(ImageSource.gallery);
                                       },
                                     ),
+                                    if(selectedImage!=null)
                                     ProfileOptionButton(
                                       icon: Icons.delete,
                                       label: 'Delete',
@@ -73,7 +109,7 @@ class ProfilePage extends StatelessWidget {
                                       labelColor: Colors.red,
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        // Handle delete
+                                        deleteImage();
                                       },
                                     ),
                                   ],
