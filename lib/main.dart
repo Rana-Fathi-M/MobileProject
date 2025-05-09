@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobileproj/home/home_page/home_page.dart';
-import 'package:mobileproj/portfolio/portfolio/portfolio.dart';
 
 void main() {
   runApp(const MyApp());

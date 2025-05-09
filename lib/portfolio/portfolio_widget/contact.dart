@@ -1,4 +1,3 @@
-
 // ==================== Contact Screen ====================
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,8 @@ class ContactScreen extends StatelessWidget {
           children: [
             const ListTile(
               leading: Icon(Icons.email),
-              title: Text("rana.fathi.rana@gmail.com"),
+              title: Text("Email"),
+              subtitle: Text("rana.fathi.rana@gmail.com"),
             ),
             const ListTile(
               leading: Icon(Icons.phone),

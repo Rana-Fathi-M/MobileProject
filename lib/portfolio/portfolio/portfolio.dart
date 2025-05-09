@@ -89,13 +89,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       price: 1199.99,
       serialNumber: "XYZ123456",
     )..toString(); // Using cascade operator
-    
 
     return Scaffold(
       appBar: AppBar(title: const Text("My Portfolio"), centerTitle: true),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Row(children: [Text("data")]),
+
             const SizedBox(height: 20),
             GestureDetector(
               onTap: changeImage,
@@ -138,14 +139,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               child: const Text("Contact Me"),
             ),
             const SizedBox(height: 20),
-             Text(
-      myPhone.toString(),
-      textAlign: TextAlign.center,
-      style: const TextStyle(fontSize: 16, color: Colors.grey),
-    ),
-
+            Text(
+              myPhone.toString(),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
+            ),
           ],
-          
         ),
       ),
     );
