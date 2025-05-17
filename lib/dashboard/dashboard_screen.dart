@@ -3,6 +3,8 @@ import 'package:mobileproj/add_item/item.dart';
 import 'package:mobileproj/add_item/item_model.dart';
 import 'package:mobileproj/details/details_page/details_page.dart';
 import 'package:mobileproj/add_item/add_item_screen.dart';
+import 'package:mobileproj/details/details_widget/details_widget.dart';
+import 'package:mobileproj/favorite/favorite_model.dart';
 import 'package:mobileproj/profile/profile_page/profile_page.dart';
 import 'package:mobileproj/profile/profile_widget/user_model.dart';
 import 'package:provider/provider.dart';
@@ -63,9 +65,9 @@ class DashboardScreen extends StatelessWidget {
                 onTap: () {
                   items.selectItem(
                     Item(
-                      images:  items.items[index].images,
-                      title:  items.items[index].title,
-                      body:  items.items[index].body,
+                      images: items.items[index].images,
+                      title: items.items[index].title,
+                      body: items.items[index].body,
                       favorite: items.items[index].favorite,
                     ),
                   );
@@ -105,11 +107,19 @@ class DashboardScreen extends StatelessWidget {
                           children: [
                             // const Text("Tree"),
                             Text(items.items[index].title),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.favorite_border),
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
+                            // IconButton(
+                            //   onPressed: () {
+                            //     Provider.of<FavoriteModel>(
+                            //       context,
+                            //       listen: false,
+                            //     ).add(items.items[index]);
+                            //   },
+                            //   icon: const Icon(Icons.favorite_border),
+                            //   padding: EdgeInsets.zero,
+                            //   constraints: const BoxConstraints(),
+                            // ),
+                            FavoriteWidget(
+                              index: items.items.indexOf(items.items[index]),
                             ),
                           ],
                         ),
